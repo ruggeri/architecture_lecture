@@ -1,6 +1,9 @@
 require 'thread'
 require 'digest/md5'
 
+# For motivation on why you might want to do all this hashing, see:
+# https://en.wikipedia.org/wiki/Hashcash
+
 Thread::abort_on_exception = true
 
 t1 = Time.now
@@ -20,7 +23,7 @@ def start_thread(thread_idx, queue)
       if hash < GOAL
         queue << hash
       end
-      
+
       value = hash.to_s
     end
   end
