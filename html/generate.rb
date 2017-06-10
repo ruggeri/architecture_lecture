@@ -2,12 +2,23 @@ require 'erb'
 
 RAW_TEMPLATE_STRING = <<~HTML
 <html>
+  <head>
+    <style>
+      video {
+        display: block;
+        max-width: 85%;
+        margin: auto;
+      }
+    </style>
+  </head>
+
   <body>
     <h1><%= title %></h1>
       <video controls
-             src="<%= video_src %>">
+             src="https://s3-us-west-1.amazonaws.com/gizmobot-videos/videos/<%= video_src %>">
       </video>
 
+      <br>
       <a href="https://ruggeri.github.io/architecture_lecture">Back</a>
     </div>
   </body>
