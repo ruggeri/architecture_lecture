@@ -83,3 +83,32 @@ PAGES.each do |page|
   content = compiled_template.result(binding)
   File.open(page[:fname], "w") { |f| f.puts content }
 end
+
+INDEX_TEMPLATE_STRING = <<~HTML
+<html>
+  <head>
+    <style>
+      video {
+        display: block;
+        max-width: 85%;
+        margin: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Architecture Lectures</h1>
+    <ul>
+      <% PAGES.each do |page| %>
+      <li>
+        <a href="/html/<%= page[:fname] %>"><%= page[:title] %></a>
+      </li>
+      <% end %>
+    </ul>
+  </body>
+</html>
+HTML
+
+compiled_template = ERB.new(INDEX_TEMPLATE_STRING)
+content = compiled_template.result(binding)
+File.open("../index.html", "w") { |f| f.puts content }
