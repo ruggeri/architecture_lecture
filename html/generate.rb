@@ -5,7 +5,7 @@ RAW_TEMPLATE_STRING = <<~HTML
   <body>
     <h1><%= title %></h1>
       <video controls
-             src="<%= video_src %>>
+             src="<%= video_src %>">
       </video>
 
       <a href="https://ruggeri.github.io/architecture_lecture">Back</a>
@@ -31,8 +31,8 @@ PAGES = [
     video_src: "04_scale_out.mov",
     fname: "04_scale_out.html", },
   { title: "05 Nginx",
-    video_src: "05_ngnix.mov",
-    fname: "05_ngnix.html", },
+    video_src: "05_nginx.mov",
+    fname: "05_nginx.html", },
   { title: "06 Parallelism",
     video_src: "06_parallelism.mov",
     fname: "06_parallelism.html", },
@@ -69,6 +69,6 @@ compiled_template = ERB.new(RAW_TEMPLATE_STRING)
 PAGES.each do |page|
   title = page[:title]
   video_src = page[:video_src]
-  content = compiled_template.run(binding)
+  content = compiled_template.result(binding)
   File.open(page[:fname], "w") { |f| f.puts content }
 end
