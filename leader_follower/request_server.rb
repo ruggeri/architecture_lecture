@@ -12,8 +12,7 @@ class RequestServer
   def run!
     @thread = Thread.new do
       while true
-        connection = @request_server.accept
-        Thread.new { handle_client_connection!(connection) }
+        handle_client_connection!(@request_server.accept)
       end
     end
   end
@@ -23,14 +22,16 @@ class RequestServer
   end
 
   def handle_client_connection!(connection)
-    while true
-      input = connection.gets
-      break if input.nil?
-      command, key = input.chomp.split
-      handle_command(connection, command, key)
-    end
+    Thread.new do
+      while true
+        input = connection.gets
+        break if input.nil?
+        command, key = input.chomp.split
+        handle_command(connection, command, key)
+      end
 
-    connection.close
+      connection.close
+    end
   end
   
   def handle_command(connection, command, key)

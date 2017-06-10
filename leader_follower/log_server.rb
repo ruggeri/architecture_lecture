@@ -9,8 +9,7 @@ class LogServer
   def run!
     @thread = Thread.new do
       while true
-        connection = @log_server.accept
-        Thread.new { handle_follower!(connection) }
+        handle_follower!(@log_server.accept)
       end
     end
   end
@@ -20,16 +19,19 @@ class LogServer
   end
 
   def handle_follower!(connection)
-    log_position = 0
-    while true
-      new_log_lines = @data_store.get_new_log_lines(log_position)
-      new_log_lines.each do |log_line|
-        connection.puts log_line
+    Thread.new do
+      log_position = 0
+      while true
+        new_log_lines = @data_store.get_new_log_lines(log_position)
+        new_log_lines.each do |log_line|
+          raise "nil log line?" if log_line.nil?
+          connection.puts log_line
+        end
+
+        log_position += new_log_lines.count
+
+        sleep 1.0
       end
-
-      log_position += new_log_lines.count
-
-      sleep 1.0
     end
   end
 end
