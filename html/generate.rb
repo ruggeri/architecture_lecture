@@ -101,7 +101,7 @@ INDEX_TEMPLATE_STRING = <<~HTML
     <ul>
       <% PAGES.each do |page| %>
       <li>
-        <a href="/html/<%= page[:fname] %>"><%= page[:title] %></a>
+        <a href="/architecture_lecture/html/<%= page[:fname] %>"><%= page[:title] %></a>
       </li>
       <% end %>
     </ul>
