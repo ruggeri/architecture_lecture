@@ -5,7 +5,12 @@
         margin: 0;
       }
 
-      .container {
+      .relative {
+        position: relative;
+        height: 100%;
+      }
+
+      .absolute {
         position: absolute;
         height: 100%;
         width: 100%;
@@ -18,12 +23,14 @@
     </style>
 
     <h1>00 Basic Setup</h1>
-    <div class="container">
-      <video controls
-             src="https://s3-us-west-1.amazonaws.com/gizmobot-videos/videos/00_basic_setup.mov">
-      </video>
-    </div>
+    <div class="relative">
+      <div class="absolute">
+        <video controls
+               src="https://s3-us-west-1.amazonaws.com/gizmobot-videos/videos/00_basic_setup.mov">
+        </video>
+      </div>
 
-    <a href="https://ruggeri.github.io/architecture_lecture">Back</a>
+      <a href="https://ruggeri.github.io/architecture_lecture">Back</a>
+    </div>
   </body>
 </html>
