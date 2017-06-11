@@ -20,6 +20,8 @@ RAW_TEMPLATE_STRING = <<~HTML
 
       <br>
       <a href="https://ruggeri.github.io/architecture_lecture">Back</a>
+      <br>
+      <a href="https://github.com/ruggeri/architecture_lecture">Source code!</a>
     </div>
   </body>
 </html>
@@ -105,6 +107,8 @@ INDEX_TEMPLATE_STRING = <<~HTML
       </li>
       <% end %>
     </ul>
+
+    <a href="https://github.com/ruggeri/architecture_lecture">Source code!</a>
   </body>
 </html>
 HTML
