@@ -65,7 +65,7 @@ PAGES = [
     video_src: "11_c_lock.mov",
     fname: "11_c_lock.html", },
   { title: "12 Leader Follower Replication",
-    video_src: "12_leader_follower",
+    video_src: "12_leader_follower.mov",
     fname: "12_leader_follower.html", },
   { title: "13 Multiple Leader Problems",
     video_src: "13_multiple_leaders_no_good.mov",
