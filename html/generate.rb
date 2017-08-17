@@ -91,6 +91,12 @@ PAGES = [
   { title: "20 Leader Follower Data Race",
     video_src: "20_leader_follower_data_race.mov",
     fname: "20_leader_follower_data_race.html", },
+  { title: "21 Sharding",
+    video_src: "21_sharding.mov",
+    fname: "21_sharding.html", },
+  { title: "22 Joining Across Shards Unscalable",
+    video_src: "22_sharding_join.mov",
+    fname: "22_joining_across_shards_unscalable.html", },
 ]
 
 compiled_template = ERB.new(RAW_TEMPLATE_STRING)
