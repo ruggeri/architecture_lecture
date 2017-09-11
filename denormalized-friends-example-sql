@@ -1,0 +1,126 @@
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  fname VARCHAR(255) NOT NULL,
+  lname VARCHAR(255) NOT NULL,
+  avatar_url VARCHAR(1024) NOT NULL
+);
+
+CREATE TABLE friendships (
+  friend_id1 INTEGER NOT NULL,
+  friend_id2 INTEGER NOT NULL,
+  PRIMARY KEY (friend_id1, friend_id2),
+  FOREIGN KEY (friend_id1) REFERENCES users (id),
+  FOREIGN KEY (friend_id2) REFERENCES users (id)
+);
+
+
+SELECT
+  users.*
+FROM
+  users
+JOIN
+  friendships ON users.id = friendships.friend_id2
+WHERE
+  friendships.friend_id1 = 101;
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  fname VARCHAR(255) NOT NULL,
+  lname VARCHAR(255) NOT NULL,
+  avatar_url VARCHAR(1024) NOT NULL
+);
+
+-- User defined type.
+CREATE TYPE basic_user_profile AS (
+  id INTEGER,
+  fname VARCHAR(255),
+  lname VARCHAR(255),
+  avatar_url VARCHAR(1024)
+);
+
+-- Denormalize friends by storing an
+-- array of the friends' profiles.
+CREATE TABLE friends (
+  id INTEGER PRIMARY KEY NOT NULL,
+  profiles basic_user_profile[]
+);
+
+BEGIN TRANSACTION;
+INSERT INTO
+  users (fname, lname, avatar_url)
+VALUES
+  ('Curie', 'Ruggeri', '/curie.jpg');
+
+INSERT INTO
+  friends (id, profiles)
+VALUES
+  (123, ARRAY[]::basic_user_profile[]);
+END TRANSACTION;
+
+BEGIN TRANSACTION;
+INSERT INTO
+  users (fname, lname, avatar_url)
+VALUES
+  ('Houdini', 'Beck', '/houdini.jpg')
+RETURNING id;
+
+INSERT INTO
+  friends (id, profiles)
+VALUES
+  (456, ARRAY[]::basic_user_profile[]);
+END TRANSACTION;
+
+SELECT
+  *
+FROM
+  users
+WHERE
+  id = 456;
+
+UPDATE
+  friends
+SET
+  profiles = profiles || ROW(
+    456,
+    'Houdini',
+    'Beck',
+    '/houdini.jpg'
+  )::basic_user_profile
+WHERE
+  id = 123;
+
+SELECT
+  *
+FROM
+  users
+WHERE
+  id = 123;
+
+UPDATE
+  friends
+SET
+  profiles = profiles || ROW(
+    123,
+    'Curie',
+    'Ruggeri',
+    '/curie.jpg'
+  )::basic_user_profile
+WHERE
+  id = 456;
+
+SELECT
+  profiles
+FROM
+  friends
+WHERE
+  id = 123;
+
+SELECT
+  profiles
+FROM
+  friends
+WHERE
+  id = 456;
+
+
+DROP TABLE friends; DROP TABLE users; DROP TYPE basic_user_profile ;
