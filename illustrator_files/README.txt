@@ -33,11 +33,6 @@
 * 08-cross-shard-transaction-fail.ai
   * Previously used this one too early.
 
-# Leader-Follower: Replication
-
-* slow_replication.ai
-* sync_replication.ai
-
 # Leader-Follower: Failover
 
 Shows a simple scenario where failover of leader-follower is
@@ -46,6 +41,18 @@ nontrivial.
 * leader_failover.ai
 * leader_failover2.ai
 * leader_failover3.ai
+
+# Lecture 3 Notes
+
+* Covered cross-shard transaction via 2PC.
+* Talked about availability problem of 2PC. CAP.
+* Talked about manual failover, and problem with bounded data loss.
+* Talked about automatic failover of leader via Paxos/Raft.
+
+# Leader-Follower: Replication
+
+* slow_replication.ai
+* sync_replication.ai
 
 # Sharding Slides Rewrite (do not use?)
 
