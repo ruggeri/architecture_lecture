@@ -2,12 +2,12 @@
 
 01. What is AWS? What is EC2?
 02. What is an IP address? What is a domain name? What is DNS?
-03. What are the two main kinds of server software running a
-  single-machine simple setup?
+03. What are the two main kinds of server software running in a
+    single-machine simple setup?
 04. What are the two kinds of bottlenecks to performance?
 05. Why is the distinction between read and write DB queries important?
 06. What are the different storage devices on a machine? What is the
-  difference?
+    difference?
 07. What kind of distribution of read/write queries is favorable? Why?
 08. What if the DB size is too great to fit into RAM? Is it hopeless?
 09. What are the two kinds of scaling?
@@ -15,9 +15,9 @@
     disadvantage?
 11. What “tier” did we explore scaling out in the previous lecture?
 12. What was the new kind of machine we introduced? Why did we introduce
-  a load balancer?
+    a load balancer?
 13. What is an advantage, besides greater capacity, of having multiple
-  application machines?
+    application machines?
 14. When we have one load balancer, what is a problem? (SPOF)
 15. Can we eliminate the load balancer as a SPOF? How?
 16. Why is having just a few load balancers not a problem?
@@ -46,8 +46,8 @@
 01. So we talked about how JOIN queries don’t necessarily scale. What
     did we suggest doing about it?
 02. Why might it make sense to denormalize? When is that worth it?
-03. What is NoSQL mean? What are the pros/cons of SQL vs NoSQL?
-04. What are ACID?
+03. What does NoSQL mean? What are the pros/cons of SQL vs NoSQL?
+04. What is ACID generally? (Not each letter yet).
 05. What is the D for?
 06. What is the C for?
 07. What is the A for? What’s an example of a classic atomic
@@ -65,15 +65,15 @@
 ## Questions After Lecture #6
 
 01. We started talking about 2PC. What is it for?
-02. Describe the scenario of managing two sites that *cannot reverse*
-    transactions.
+02. **Ned: Describe the scenario of managing two sites that *cannot
+    reverse* transactions.**
 03. Describe how 2PC works, in the good case.
-04. How is 2PC different from 2PL. Or at least: how is the “setting”
+04. How is 2PC different from 2PL? Or at least: how is the “setting”
     or “context” different?
 05. What kind of things can go wrong in distributed systems?
-    01. Note: net splits and machine failures look the same from the
-        outside.
-    02. 2 generals.
+    01. **Ned: remember to note that net splits and machine failures
+        look the same from the outside.**
+    02. **Ned: mention the two generals problem.**
 06. Let’s say a coordinator sends out a lock command to both sites but
     only one responds. What could be happening with the other site?
     01. It may have failed before the lock message was sent.
@@ -88,15 +88,14 @@
     01. Coordinator should time out and send abort to both machines.
     02. Coordinator must continue sending abort until both machines
         ack.
-08. If a site has locked, and is waiting for a commit message that is
+08. If a site has locked, and is waiting for a commit message that
     doesn’t arrive, what can it do?
-    01. If they don’t get it, note that this is a trick question.
-    02. Might note: if the site can’t contact the other site, then it
-        can’t learn the decision. This can happen with network
-        partition.
+    01. **Ned: if necessary, note that this is a trick question.**
+    02. Possible answer: contact the other site. But why might that not
+        work?
 09. Why doesn’t the “double commit” solution work?
-    01. That is, why can’t the site rollback the change unless it
-        receives a second commit msg from the coordinator?
+    01. That is, why can’t the a rollback the change unless it receives
+        a prompt second commit msg from the coordinator?
 
 ## Lecture #7
 
@@ -106,7 +105,8 @@
 03. Note that if you are trying to do reads, you still need to lock if
     you want true isolation.
     01. Mention that this has bad latency.
-    02. Mention concept of snapshot reads.
+    02. You can quickly mention problem with async replication.
+    03. Mention concept of snapshot reads.
 04. At this point return to Drive slides.
 05. Demonstrate problem with trivial leader election idea.
 06. Talk about majority voting and idea of Raft.
