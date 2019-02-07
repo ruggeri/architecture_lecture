@@ -1,0 +1,1 @@
+ls *ai | parallel convert -colorspace sRGB {} pngs/{.}.png
